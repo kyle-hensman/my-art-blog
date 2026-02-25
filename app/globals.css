@@ -124,3 +124,39 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Artsy Theme Customizations */
+@layer utilities {
+  .delay-2000 {
+    animation-delay: 2s;
+  }
+
+  .artsy-gradient {
+    @apply bg-gradient-to-br from-amber-100 via-orange-50 to-red-50 dark:from-amber-950 dark:via-slate-900 dark:to-slate-950;
+  }
+
+  .artsy-text-primary {
+    @apply text-amber-950 dark:text-amber-50;
+  }
+
+  .artsy-text-secondary {
+    @apply text-amber-900/70 dark:text-amber-100/70;
+  }
+
+  .artsy-card {
+    @apply rounded-xl border-amber-200 bg-white shadow-sm transition-all hover:shadow-lg dark:border-amber-800 dark:bg-slate-900;
+  }
+
+  .artsy-button-primary {
+    @apply inline-flex items-center justify-center px-8 py-4 rounded-lg bg-amber-600 text-white font-semibold hover:bg-amber-700 transition-colors shadow-lg hover:shadow-xl;
+  }
+
+  .artsy-button-secondary {
+    @apply inline-flex items-center justify-center px-8 py-4 rounded-lg border-2 border-amber-400 text-amber-900 font-semibold hover:bg-amber-50 transition-colors dark:border-amber-500 dark:text-amber-100 dark:hover:bg-amber-900/20;
+  }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
