@@ -51,7 +51,7 @@ My Art Blog is a personal blogging platform designed for artists and creatives t
    ```bash
    NEXT_PUBLIC_SANITY_PROJECT_ID=your_project_id
    NEXT_PUBLIC_SANITY_DATASET=production
-   NEXT_PUBLIC_SANITY_API_VERSION=2026-02-2
+   NEXT_PUBLIC_SANITY_API_VERSION=2026-02-25
    ```
    
    Get these values from your [Sanity project dashboard](https://manage.sanity.io)
@@ -94,7 +94,6 @@ My Art Blog is a personal blogging platform designed for artists and creatives t
 │   └── schemaTypes/
 │       ├── index.ts             # Schema index
 │       └── postType.ts          # Post document type definition
-├── tailwind.config.ts           # Tailwind CSS configuration
 ├── tsconfig.json                # TypeScript configuration
 └── package.json                 # Dependencies and scripts
 ```
@@ -127,7 +126,7 @@ Create a `.env.local` file with these variables:
 ```env
 NEXT_PUBLIC_SANITY_PROJECT_ID=<your-project-id>
 NEXT_PUBLIC_SANITY_DATASET=production
-NEXT_PUBLIC_SANITY_API_VERSION=2026-02-2
+NEXT_PUBLIC_SANITY_API_VERSION=2026-02-25
 ```
 
 **Note:** Variables prefixed with `NEXT_PUBLIC_` are exposed to the browser.
@@ -143,7 +142,7 @@ The easiest way to deploy is using [Vercel](https://vercel.com):
 3. Add environment variables in Vercel dashboard
 4. Deploy!
 
-**[Deploy Now](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fyournkyle-hensman%2Fmy-art-blog)**
+**[Deploy Now](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fkyle-hensman%2Fmy-art-blog)**
 
 ### Other Hosting Options
 
