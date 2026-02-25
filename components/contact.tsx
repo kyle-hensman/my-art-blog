@@ -92,8 +92,11 @@ export default function Contact() {
           </CardHeader>
           <CardContent>
             {submitted && (
-              <div className="mb-6 p-4 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-300 dark:border-green-800">
-                <p className="text-green-900 dark:text-green-100 font-semibold">
+              <div
+                role="status"
+                aria-live="polite"
+                className="mb-6 p-4 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-300 dark:border-green-800"
+              >                <p className="text-green-900 dark:text-green-100 font-semibold">
                   ✓ Thank you! Your message has been sent successfully.
                 </p>
               </div>

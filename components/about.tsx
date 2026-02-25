@@ -1,6 +1,7 @@
 'use client'
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import Image from "next/image"
 
 export default function About() {
   return (
@@ -19,10 +20,12 @@ export default function About() {
           {/* Artist Image */}
           <div className="md:col-span-2">
             <div className="relative rounded-xl overflow-hidden shadow-xl">
-              <img
+              <Image
                 src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=500&fit=crop"
                 alt="Artist at Work"
                 className="w-full h-full object-cover"
+                height={500}
+                width={400}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-amber-900/40 to-transparent"></div>
             </div>
