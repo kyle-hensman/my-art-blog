@@ -51,7 +51,7 @@ My Art Blog is a personal blogging platform designed for artists and creatives t
    ```bash
    NEXT_PUBLIC_SANITY_PROJECT_ID=your_project_id
    NEXT_PUBLIC_SANITY_DATASET=production
-   NEXT_PUBLIC_SANITY_API_VERSION=2024-01-01
+   NEXT_PUBLIC_SANITY_API_VERSION=2026-02-2
    ```
    
    Get these values from your [Sanity project dashboard](https://manage.sanity.io)
@@ -127,7 +127,7 @@ Create a `.env.local` file with these variables:
 ```env
 NEXT_PUBLIC_SANITY_PROJECT_ID=<your-project-id>
 NEXT_PUBLIC_SANITY_DATASET=production
-NEXT_PUBLIC_SANITY_API_VERSION=2024-01-01
+NEXT_PUBLIC_SANITY_API_VERSION=2026-02-2
 ```
 
 **Note:** Variables prefixed with `NEXT_PUBLIC_` are exposed to the browser.
