@@ -3,6 +3,7 @@ import { client } from "@/sanity/lib/client";
 import Link from "next/link";
 import { urlFor } from "@/sanity/lib/image";
 import { notFound } from "next/navigation";
+import Image from "next/image";
 
 const POST_QUERY = `*[_type == "post" && slug.current == $slug][0]`;
 
@@ -28,7 +29,7 @@ export default async function PostPage({
         ← Back to posts
       </Link>
       {postImageUrl && (
-        <img
+        <Image
           src={postImageUrl}
           alt={post.title}
           className="aspect-video rounded-xl"
