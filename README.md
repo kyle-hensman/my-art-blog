@@ -69,7 +69,7 @@ My Art Blog is a personal blogging platform designed for artists and creatives t
 
 ## Project Structure
 
-```
+```text
 ├── app/                          # Next.js App Router
 │   ├── layout.tsx               # Root layout
 │   ├── page.tsx                 # Homepage
@@ -85,7 +85,6 @@ My Art Blog is a personal blogging platform designed for artists and creatives t
 │   └── ...
 ├── public/                       # Static assets
 ├── sanity/                       # Sanity CMS configuration
-│   ├── client.ts                # Sanity client setup
 │   ├── env.ts                   # Environment configuration
 │   ├── structure.ts             # Studio structure
 │   ├── lib/
@@ -144,7 +143,7 @@ The easiest way to deploy is using [Vercel](https://vercel.com):
 3. Add environment variables in Vercel dashboard
 4. Deploy!
 
-**[Deploy Now](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fyourname%2Fmy-art-blog)**
+**[Deploy Now](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fyournkyle-hensman%2Fmy-art-blog)**
 
 ### Other Hosting Options
 
