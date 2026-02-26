@@ -10,6 +10,14 @@ import { socials } from '@/config/socials'
 import { useRouter } from 'next/navigation'
 import { contacts } from '@/config/contacts'
 
+/**
+ * Render a contact section with contact info cards, a client-managed contact form, and social links.
+ *
+ * The form manages name, email, subject, and message locally, shows a loading state while submitting,
+ * displays a temporary success banner after submission, and resets the form fields.
+ *
+ * @returns The contact section as a JSX element
+ */
 export default function Contact() {
   const [formData, setFormData] = useState({
     name: '',
