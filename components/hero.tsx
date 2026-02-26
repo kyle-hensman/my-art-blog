@@ -1,11 +1,27 @@
-'use client'
+import { client } from "@/sanity/lib/client";
+import { SanityDocument } from "next-sanity";
+
+const query = `*[_type == "hero"][0]{
+  heading,
+  body,
+  badgeText,
+  backgroundImage{
+    asset->{
+      url
+    }
+  }
+}`
+
+const options = { next: { revalidate: 30 } };
 
 /**
  * Render the themed hero section showcasing Prince Edward Island artwork and primary calls to action.
  *
  * @returns The JSX element containing the hero section with decorative background elements, a badge, headline, descriptive text, and two call-to-action links ("View Gallery" and "Get in Touch").
  */
-export default function Hero() {
+export default async function Hero() {
+  const data = await client.fetch<SanityDocument>(query, {}, options);
+  
   return (
     <section className="relative overflow-hidden bg-gradient-to-br from-amber-50 via-orange-50 to-red-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 py-24 md:py-32">
       {/* Decorative elements */}
@@ -15,16 +31,19 @@ export default function Hero() {
       <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <div className="mb-6 inline-block">
           <span className="inline-flex items-center px-4 py-2 rounded-full border border-amber-300 bg-amber-50 text-amber-900 text-sm font-medium dark:border-amber-400 dark:bg-amber-900/20 dark:text-amber-100">
-            🎨 Celebrating PEI Art & Culture
+            {/* 🎨 Celebrating PEI Art & Culture */}
+            {data && data?.badgeText || "🎨 Celebrating PEI Art & Culture"}
           </span>
         </div>
         
         <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-amber-950 dark:text-amber-50 mb-6 leading-tight">
-          Artistry in Motion
+          {/* Artistry in Motion */}
+          {data && data?.heading || "Artistry in Motion"}
         </h1>
         
         <p className="text-xl md:text-2xl text-amber-900/70 dark:text-amber-100/70 mb-8 max-w-2xl mx-auto leading-relaxed">
-          Discover vibrant paintings that capture the essence of Prince Edward Island's natural beauty and artistic spirit
+          {/* Discover vibrant paintings that capture the essence of Prince Edward Island's natural beauty and artistic spirit */}
+          {data && data?.body || "Discover vibrant paintings that capture the essence of Prince Edward Island's natural beauty and artistic spirit"}
         </p>
         
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
