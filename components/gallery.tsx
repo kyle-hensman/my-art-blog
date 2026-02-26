@@ -1,8 +1,6 @@
 'use client'
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-<<<<<<< HEAD
-=======
+import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import Image from "next/image"
 import {
   Dialog,
@@ -14,7 +12,6 @@ import {
 } from "./ui/dialog"
 import { Button } from "./ui/button"
 import { useState } from "react"
->>>>>>> cae707917813fd8dfca753bbe418c7431c6cc70e
 
 interface GalleryItem {
   id: number
@@ -30,55 +27,35 @@ const galleryItems: GalleryItem[] = [
     title: "Red Cliffs Sunset",
     category: "Landscape",
     description: "Oil on canvas capturing the dramatic evening light over PEI's iconic red cliffs",
-<<<<<<< HEAD
-    image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=500&h=500&fit=crop",
-=======
     image: "https://images.unsplash.com/photo-1561070791-2526d30994b5",
->>>>>>> cae707917813fd8dfca753bbe418c7431c6cc70e
   },
   {
     id: 2,
     title: "Island Dreams",
     category: "Abstract",
     description: "Mixed media exploration of island consciousness and natural rhythms",
-<<<<<<< HEAD
-    image: "https://images.unsplash.com/photo-1578321272176-d58e2d44f8a9?w=500&h=500&fit=crop",
-=======
     image: "https://images.unsplash.com/photo-1578321272176-d58e2d44f8a9",
->>>>>>> cae707917813fd8dfca753bbe418c7431c6cc70e
   },
   {
     id: 3,
     title: "Dune Grasses",
     category: "Nature Study",
     description: "Watercolor and ink capturing the delicate textures of coastal vegetation",
-<<<<<<< HEAD
-    image: "https://images.unsplash.com/photo-1578821870619-69d3e631a387?w=500&h=500&fit=crop",
-=======
     image: "https://images.unsplash.com/photo-1578821870619-69d3e631a387",
->>>>>>> cae707917813fd8dfca753bbe418c7431c6cc70e
   },
   {
     id: 4,
     title: "Autumn Harbor",
     category: "Seascape",
     description: "Acrylic painting of fishing boats at golden hour reflection",
-<<<<<<< HEAD
-    image: "https://images.unsplash.com/photo-1579783902614-e3fb5141b0cb?w=500&h=500&fit=crop",
-=======
     image: "https://images.unsplash.com/photo-1579783902614-e3fb5141b0cb",
->>>>>>> cae707917813fd8dfca753bbe418c7431c6cc70e
   },
   {
     id: 5,
     title: "Northern Lights",
     category: "Celestial",
     description: "Ethereal representation of dancing aurora over pristine waters",
-<<<<<<< HEAD
-    image: "https://images.unsplash.com/photo-1549887534-7eefe4e3d8ba?w=500&h=500&fit=crop",
-=======
     image: "https://images.unsplash.com/photo-1549887534-7eefe4e3d8ba",
->>>>>>> cae707917813fd8dfca753bbe418c7431c6cc70e
   },
   {
     id: 6,

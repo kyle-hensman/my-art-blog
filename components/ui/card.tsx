@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-
->>>>>>> cae707917813fd8dfca753bbe418c7431c6cc70e
 import * as React from "react"
 
 import { cn } from "@/lib/utils"
