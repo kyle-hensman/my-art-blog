@@ -3,6 +3,11 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import Image from "next/image"
 
+/**
+ * Renders the "About the Artist" section containing a header, artist image, bio with medium tags, a stats grid, and an artist statement card.
+ *
+ * @returns A JSX element representing the complete "About the Artist" section
+ */
 export default function About() {
   return (
     <section id="about" className="py-20 md:py-28 bg-gradient-to-b from-amber-50 to-white dark:from-slate-950 dark:to-slate-900">

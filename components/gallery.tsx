@@ -66,6 +66,13 @@ const galleryItems: GalleryItem[] = [
   },
 ]
 
+/**
+ * Renders a featured gallery section with a responsive grid of cards and a modal viewer.
+ *
+ * Displays gallery items as clickable cards; clicking a card opens a dialog that shows the selected item's image and details and provides controls to navigate through items cyclically.
+ *
+ * @returns The gallery React element containing the cards grid and a modal dialog for viewing and navigating items.
+ */
 export default function Gallery() {
   const [open, setOpen] = useState(false)
   const [activeIndex, setActiveIndex] = useState<number | null>(null)

@@ -1,3 +1,8 @@
+/**
+ * Render the site footer containing studio information, navigation links, social links, and a newsletter email input.
+ *
+ * @returns The footer JSX element with a responsive four-column layout and a bottom copyright row.
+ */
 export default function Footer() {
   return (
     <footer className="bg-amber-950 dark:bg-slate-950 text-amber-50 py-12">

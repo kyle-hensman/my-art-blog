@@ -7,6 +7,11 @@ import { cn } from "@/lib/utils"
 import { Label } from "@/components/ui/label"
 import { Separator } from "@/components/ui/separator"
 
+/**
+ * Renders a fieldset container for grouping related form fields with built-in layout and responsive gap rules.
+ *
+ * @returns A <fieldset> element with data-slot="field-set" and composed layout classes for spacing and responsive adjustments.
+ */
 function FieldSet({ className, ...props }: React.ComponentProps<"fieldset">) {
   return (
     <fieldset
@@ -21,6 +26,14 @@ function FieldSet({ className, ...props }: React.ComponentProps<"fieldset">) {
   )
 }
 
+/**
+ * Renders a field legend element with two visual variants that control text size.
+ *
+ * The `variant` prop selects between the "legend" (larger text) and "label" (smaller text) styles; any other props are forwarded to the underlying `legend` element.
+ *
+ * @param variant - Selects the visual variant: `"legend"` for base/regular legend text, `"label"` for smaller label text
+ * @returns The rendered `legend` element for use within a fieldset
+ */
 function FieldLegend({
   className,
   variant = "legend",
@@ -41,6 +54,12 @@ function FieldLegend({
   )
 }
 
+/**
+ * Renders a container div that groups related form fields and applies responsive layout and spacing.
+ *
+ * @param className - Additional CSS class names to merge with the component's default layout classes
+ * @returns A div element with data-slot="field-group" that organizes child fields with orientation-aware spacing
+ */
 function FieldGroup({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -78,6 +97,12 @@ const fieldVariants = cva(
   }
 )
 
+/**
+ * Renders a grouped field container that applies orientation-aware layout and styling.
+ *
+ * @param orientation - Layout orientation for the field group; one of `"vertical"`, `"horizontal"`, or `"responsive"`. Controls which variant classes are applied.
+ * @returns A div element that groups related form controls and descriptions with the appropriate orientation-based classes.
+ */
 function Field({
   className,
   orientation = "vertical",
@@ -94,6 +119,13 @@ function Field({
   )
 }
 
+/**
+ * Layout container for a field's primary content.
+ *
+ * Renders a div with data-slot="field-content" that provides a flexible, columnar layout and consistent vertical spacing for a field's children.
+ *
+ * @returns The rendered div element used as the field content container.
+ */
 function FieldContent({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -107,6 +139,12 @@ function FieldContent({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
+/**
+ * Renders a Label configured as the field's label slot with responsive and state-aware styling.
+ *
+ * @param className - Additional class names to merge with the component's default field-label styles
+ * @returns A Label element with data-slot="field-label" and composed classes for layout, responsiveness, and state styling
+ */
 function FieldLabel({
   className,
   ...props
@@ -125,6 +163,13 @@ function FieldLabel({
   )
 }
 
+/**
+ * Renders a compact title used inside a field's label slot.
+ *
+ * Accepts standard div props and merges the provided `className` with internal layout and state styles.
+ *
+ * @returns A div element with `data-slot="field-label"` styled as a compact field title.
+ */
 function FieldTitle({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -138,6 +183,11 @@ function FieldTitle({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
+/**
+ * Render a paragraph that displays contextual description text for a form field.
+ *
+ * @returns A paragraph element containing the field's descriptive text, with styling and optional custom classes merged into the component.
+ */
 function FieldDescription({ className, ...props }: React.ComponentProps<"p">) {
   return (
     <p
@@ -153,6 +203,13 @@ function FieldDescription({ className, ...props }: React.ComponentProps<"p">) {
   )
 }
 
+/**
+ * Renders a horizontal separator with an optional centered content slot.
+ *
+ * @param children - Optional content to display centered inside the separator (e.g., "or")
+ * @param className - Additional class names applied to the outer container
+ * @returns A div containing a horizontal separator line and, if provided, centered content
+ */
 function FieldSeparator({
   children,
   className,
@@ -183,6 +240,16 @@ function FieldSeparator({
   )
 }
 
+/**
+ * Render field-level error content, using `children` when present or deriving messages from `errors`.
+ *
+ * If `children` is provided it is rendered as-is. Otherwise `errors` are deduplicated by message:
+ * a single unique message is rendered as plain text; multiple unique messages are rendered as a bulleted list.
+ *
+ * @param children - Node to render instead of deriving content from `errors`
+ * @param errors - Optional array of error objects; each object may include a `message` string used for display
+ * @returns A div with role="alert" containing the error content and destructive styling, or `null` when there is no content
+ */
 function FieldError({
   className,
   children,
