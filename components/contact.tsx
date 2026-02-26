@@ -72,16 +72,18 @@ export default function Contact() {
               key={i}
               role="button"
               tabIndex={0}
-              className='hover:cursor-pointer'
-              onClick={() => {
-                router.replace(item.href)
-              }}
+              className='hover:cursor-pointer group'
             >
               <CardContent className="pt-6">
                 <div className="text-4xl mb-3">{item.icon}</div>
                 <h3 className="font-bold text-amber-900 dark:text-amber-50 mb-1">{item.title}</h3>
                 {item.href && item.href !== '#' ? (
-                  <a href={item.href} className="text-amber-900/70 dark:text-amber-100/70 hover:underline">
+                  <a 
+                    href={item.href}
+                    target={item.href.startsWith('http') ? '_blank' : undefined}
+                    rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                    className="text-amber-900/70 dark:text-amber-100/70 hover:underline"
+                  >
                     {item.content}
                   </a>
                   ) : (

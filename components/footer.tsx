@@ -2,6 +2,12 @@ import { socials } from "@/config/socials";
 import { Button } from "./ui/button";
 
 export default function Footer() {
+  function handleNewsletter(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    // Implement newsletter subscription logic here
+    alert("Thank you for subscribing to our newsletter!");
+  }
+
   return (
     <footer className="bg-amber-950 dark:bg-slate-950 text-amber-50 py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -38,7 +44,7 @@ export default function Footer() {
           <div>
             <h4 className="font-bold mb-4">Newsletter</h4>
             <p className="text-amber-100 text-sm mb-3">Get updates on new works and exhibitions</p>
-            <form className="flex">
+            <form className="flex" onSubmit={handleNewsletter}>
               <input
                 type="email"
                 placeholder="Your email"
