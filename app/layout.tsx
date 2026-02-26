@@ -23,6 +23,16 @@ export const metadata: Metadata = {
   },
 };
 
+/**
+ * Provides the root HTML structure and global styling for the application.
+ *
+ * Renders an <html> element (lang="en") with hydration warnings suppressed and a <body>
+ * element that injects global font CSS variables and theme-aware utility classes, then
+ * renders the provided children inside the body.
+ *
+ * @param children - The React node(s) to render inside the document body
+ * @returns The root React element containing the <html> and <body> that wrap `children`
+ */
 export default function RootLayout({
   children,
 }: Readonly<{

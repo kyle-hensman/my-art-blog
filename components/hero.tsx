@@ -1,5 +1,10 @@
 'use client'
 
+/**
+ * Render the themed hero section showcasing Prince Edward Island artwork and primary calls to action.
+ *
+ * @returns The JSX element containing the hero section with decorative background elements, a badge, headline, descriptive text, and two call-to-action links ("View Gallery" and "Get in Touch").
+ */
 export default function Hero() {
   return (
     <section className="relative overflow-hidden bg-gradient-to-br from-amber-50 via-orange-50 to-red-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 py-24 md:py-32">
