@@ -6,6 +6,9 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
+import { socials } from '@/config/socials'
+import { useRouter } from 'next/navigation'
+import { contacts } from '@/config/contacts'
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -16,6 +19,8 @@ export default function Contact() {
   })
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
+
+  const router = useRouter();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
@@ -54,31 +59,26 @@ export default function Contact() {
 
         <div className="grid md:grid-cols-3 gap-8 mb-12">
           {/* Contact Info Cards */}
-          {[
-            {
-              icon: "📧",
-              title: "Email",
-              content: "connect@artistname.pei",
-              href: "mailto:connect@artistname.pei"
-            },
-            {
-              icon: "📍",
-              title: "Location",
-              content: "Prince Edward Island, Canada",
-              href: "#"
-            },
-            {
-              icon: "📱",
-              title: "Studio",
-              content: "By appointment",
-              href: "#"
-            }
-          ].map((item, i) => (
-            <Card key={i}>
+          {contacts.map((item, i) => (
+            <Card
+              key={i}
+              role="button"
+              tabIndex={0}
+              className='hover:cursor-pointer'
+              onClick={() => {
+                router.replace(item.href)
+              }}
+            >
               <CardContent className="pt-6">
                 <div className="text-4xl mb-3">{item.icon}</div>
                 <h3 className="font-bold text-amber-900 dark:text-amber-50 mb-1">{item.title}</h3>
-                <p className="text-amber-900/70 dark:text-amber-100/70">{item.content}</p>
+                {item.href && item.href !== '#' ? (
+                  <a href={item.href} className="text-amber-900/70 dark:text-amber-100/70 hover:underline">
+                    {item.content}
+                  </a>
+                  ) : (
+                    <p className="text-amber-900/70 dark:text-amber-100/70">{item.content}</p>
+                  )}
               </CardContent>
             </Card>
           ))}
@@ -172,13 +172,14 @@ export default function Contact() {
             Stay connected on social media
           </p>
           <div className="flex justify-center gap-4">
-            {['Instagram', 'Facebook', 'Pinterest'].map((platform) => (
+            {socials.map((social) => (
               <a
-                key={platform}
-                href="#"
+                key={social.name}
+                href={social.href}
+                target="_blank"
                 className="px-4 py-2 rounded-lg border border-amber-300 text-amber-900 hover:bg-amber-50 transition-colors dark:border-amber-600 dark:text-amber-100 dark:hover:bg-amber-900/20 font-medium"
               >
-                {platform}
+                {social.name}
               </a>
             ))}
           </div>

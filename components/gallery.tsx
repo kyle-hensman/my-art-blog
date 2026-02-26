@@ -75,6 +75,11 @@ export default function Gallery() {
     setOpen(true)
   }
 
+  function previousItem() {
+    if (activeIndex === null) return
+    setActiveIndex((activeIndex - 1) % galleryItems.length)
+  }
+
   function nextItem() {
     if (activeIndex === null) return
     setActiveIndex((activeIndex + 1) % galleryItems.length)
@@ -102,8 +107,16 @@ export default function Gallery() {
           {galleryItems.map((item, index) => (
             <Card
               key={item.id}
+              role="button"
+              tabIndex={0}
               onClick={() => openItem(index)}
               className="overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer group hover:cursor-pointer"
+              onKeyDown={(event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                  event.preventDefault()
+                  openItem(index)
+                }
+              }}
             >
               <div className="relative overflow-hidden h-64">
                 <Image
@@ -150,7 +163,7 @@ export default function Gallery() {
 
               <DialogFooter>
                 <div className="flex justify-between w-full">
-                  <Button variant={'secondary'} onClick={nextItem}>
+                  <Button variant={'secondary'} onClick={previousItem} disabled={activeIndex == 0}>
                     Previous ←
                   </Button>
                   <Button onClick={nextItem}>
