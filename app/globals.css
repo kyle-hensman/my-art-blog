@@ -124,3 +124,14 @@
     @apply bg-background text-foreground;
   }
 }
+
+@utility delay-2000 {
+  animation-delay: 2s;
+}
+
+/* Smooth scrolling */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
