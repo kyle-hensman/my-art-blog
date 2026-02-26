@@ -58,10 +58,10 @@ export default function Contact() {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-4xl md:text-5xl font-bold text-amber-950 dark:text-amber-50 mb-4">
-            Let's Connect
+            let&apos;s Connect
           </h2>
           <p className="text-lg text-amber-900/70 dark:text-amber-100/70">
-            Have a question, commission inquiry, or just want to chat? I'd love to hear from you!
+            Have a question, commission inquiry, or just want to chat? I&apos;d love to hear from you!
           </p>
         </div>
 
@@ -98,7 +98,7 @@ export default function Contact() {
         <Card className="max-w-2xl mx-auto shadow-lg">
           <CardHeader>
             <CardTitle>Send a Message</CardTitle>
-            <CardDescription>Fill out the form below and I'll get back to you as soon as possible</CardDescription>
+            <CardDescription>Fill out the form below and I&apos;ll get back to you as soon as possible</CardDescription>
           </CardHeader>
           <CardContent>
             {submitted && (
