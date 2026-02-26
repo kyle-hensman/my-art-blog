@@ -1,10 +1,12 @@
+'use client'
+
 import { socials } from "@/config/socials";
 import { Button } from "./ui/button";
 
 export default function Footer() {
   function handleNewsletter(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    // Implement newsletter subscription logic here
+
     alert("Thank you for subscribing to our newsletter!");
   }
 
