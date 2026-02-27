@@ -1,14 +1,35 @@
-'use client'
-
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import Image from "next/image"
+import { client } from "@/sanity/lib/client";
+
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+
+const query = `*[_type == "about"][0]{
+  name,
+  details,
+  yearsExperience,
+  artworksCreated,
+  exhibitions,
+  happyCollectors,
+  artistStatement,
+  mediums,
+  image{
+    asset->{
+      url
+    }
+  }
+}`
+
+const options = { next: { revalidate: 30 } };
 
 /**
  * Renders the "About the Artist" section containing a header, artist image, bio with medium tags, a stats grid, and an artist statement card.
  *
  * @returns A JSX element representing the complete "About the Artist" section
  */
-export default function About() {
+export default async function About() {
+  const data = await client.fetch(query, {}, options);
+  
+
   return (
     <section id="about" className="py-20 md:py-28 bg-gradient-to-b from-amber-50 to-white dark:from-slate-950 dark:to-slate-900">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -26,7 +47,8 @@ export default function About() {
           <div className="md:col-span-2">
             <div className="relative rounded-xl overflow-hidden shadow-xl">
               <Image
-                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=500&fit=crop"
+                // src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=500&fit=crop"
+                src={data?.image?.asset?.url || "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=500&fit=crop"}
                 alt="Artist at Work"
                 className="w-full h-full object-cover"
                 height={500}
@@ -41,26 +63,20 @@ export default function About() {
             <div className="space-y-6">
               <div>
                 <h3 className="text-2xl font-bold text-amber-950 dark:text-amber-50 mb-3">
-                  Capturing Island Soul
+                  {/* Capturing Island Soul */}
+                  {data && data?.name || "Capturing Island Soul"}
                 </h3>
                 <p className="text-amber-900/80 dark:text-amber-100/80 leading-relaxed mb-4">
-                  Based in beautiful Prince Edward Island, I'm a contemporary artist dedicated to capturing the raw beauty and vibrant energy of coastal landscapes and the natural world.
-                </p>
-                <p className="text-amber-900/80 dark:text-amber-100/80 leading-relaxed">
-                  My work combines traditional painting techniques with modern artistic expression, exploring themes of nature, light, and the profound connection between humans and their environment.
+                  {data && data?.details || "Based in beautiful Prince Edward Island, I'm a contemporary artist dedicated to capturing the raw beauty and vibrant energy of coastal landscapes and the natural world."}
                 </p>
               </div>
 
               <div className="flex flex-wrap gap-3">
-                <span className="px-4 py-2 rounded-full bg-amber-100 text-amber-900 text-sm font-semibold dark:bg-amber-900/30 dark:text-amber-100">
-                  Oil & Acrylic
-                </span>
-                <span className="px-4 py-2 rounded-full bg-orange-100 text-orange-900 text-sm font-semibold dark:bg-orange-900/30 dark:text-orange-100">
-                  Watercolor
-                </span>
-                <span className="px-4 py-2 rounded-full bg-red-100 text-red-900 text-sm font-semibold dark:bg-red-900/30 dark:text-red-100">
-                  Mixed Media
-                </span>
+                {data && data?.mediums?.map((medium: any) => (
+                  <span key={medium} className="px-4 py-2 rounded-full bg-amber-100 text-amber-900 text-sm font-semibold dark:bg-amber-900/30 dark:text-amber-100">
+                    {medium}
+                  </span>
+                ))}
               </div>
             </div>
           </div>
@@ -68,23 +84,57 @@ export default function About() {
 
         {/* Stats */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
-          {[
-            { number: "15+", label: "Years Experience" },
-            { number: "200+", label: "Artworks Created" },
-            { number: "50+", label: "Exhibitions" },
-            { number: "1000+", label: "Happy Collectors" },
-          ].map((stat, i) => (
-            <Card key={i} className="text-center">
+          {data && (
+            <Card className="text-center">
               <CardContent className="pt-6">
                 <div className="text-3xl font-bold text-amber-600 dark:text-amber-400 mb-2">
-                  {stat.number}
+                  {data.yearsExperience || 10}+
                 </div>
                 <div className="text-sm text-amber-900/70 dark:text-amber-100/70">
-                  {stat.label}
+                  Years of Experience
                 </div>
               </CardContent>
             </Card>
-          ))}
+          )}
+
+          {data && (
+            <Card className="text-center">
+              <CardContent className="pt-6">
+                <div className="text-3xl font-bold text-amber-600 dark:text-amber-400 mb-2">
+                  {data.artworksCreated || 200}+
+                </div>
+                <div className="text-sm text-amber-900/70 dark:text-amber-100/70">
+                  Artworks Created
+                </div>
+              </CardContent>
+            </Card>
+          )}
+
+          {data && (
+            <Card className="text-center">
+              <CardContent className="pt-6">
+                <div className="text-3xl font-bold text-amber-600 dark:text-amber-400 mb-2">
+                  {data.exhibitions || 15}+
+                </div>
+                <div className="text-sm text-amber-900/70 dark:text-amber-100/70">
+                  Exhibitions
+                </div>
+              </CardContent>
+            </Card>
+          )}
+
+          {data && (
+            <Card className="text-center">
+              <CardContent className="pt-6">
+                <div className="text-3xl font-bold text-amber-600 dark:text-amber-400 mb-2">
+                  {data.happyCollectors || 50}+
+                </div>
+                <div className="text-sm text-amber-900/70 dark:text-amber-100/70">
+                  Happy Collectors
+                </div>
+              </CardContent>
+            </Card>
+          )}
         </div>
 
         {/* Artist Statement */}
@@ -94,10 +144,7 @@ export default function About() {
           </CardHeader>
           <CardContent className="space-y-4">
             <p className="text-amber-900/80 dark:text-amber-100/80 leading-relaxed italic">
-              "Art is my conversation with the world. Through color, texture, and form, I explore the delicate balance between chaos and harmony that exists in nature. Prince Edward Island, with its ever-changing light and dramatic coastlines, continues to be my greatest teacher and inspiration."
-            </p>
-            <p className="text-amber-900/80 dark:text-amber-100/80 leading-relaxed italic">
-              "I believe that art has the power to transform spaces, evoke emotions, and connect us to something greater than ourselves. Every piece I create is an invitation to pause, reflect, and see the world through fresh eyes."
+              {data?.artistStatement || "I believe that art has the power to transform spaces, evoke emotions, and connect us to something greater than ourselves. Every piece I create is an invitation to pause, reflect, and see the world through fresh eyes."}
             </p>
           </CardContent>
         </Card>

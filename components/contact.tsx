@@ -1,20 +1,19 @@
 'use client'
 
 import { useState } from 'react'
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import { socials } from '@/config/socials'
-import { useRouter } from 'next/navigation'
 import { contacts } from '@/config/contacts'
 
 /**
- * Render a contact section with contact info cards, a client-managed contact form, and social links.
+ * Renders the contact section with contact info cards, a client-managed form, and social links.
  *
- * The form manages name, email, subject, and message locally, shows a loading state while submitting,
- * displays a temporary success banner after submission, and resets the form fields.
+ * The form displays a loading state during submission and a temporary success message after completion.
  *
  * @returns The contact section as a JSX element
  */
@@ -27,8 +26,6 @@ export default function Contact() {
   })
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
-
-  const router = useRouter();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target

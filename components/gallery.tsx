@@ -1,7 +1,10 @@
 'use client'
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { useEffect, useState } from "react"
+import { client } from "@/sanity/lib/client"
 import Image from "next/image"
+
+import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import {
   Dialog,
   DialogContent,
@@ -11,60 +14,28 @@ import {
   DialogTitle,
 } from "./ui/dialog"
 import { Button } from "./ui/button"
-import { useState } from "react"
 
 interface GalleryItem {
-  id: number
+  id: string
   title: string
   category: string
   description: string
-  image: string
+  image: string | any
 }
 
-const galleryItems: GalleryItem[] = [
-  {
-    id: 1,
-    title: "Red Cliffs Sunset",
-    category: "Landscape",
-    description: "Oil on canvas capturing the dramatic evening light over PEI's iconic red cliffs",
-    image: "https://images.unsplash.com/photo-1561070791-2526d30994b5",
-  },
-  {
-    id: 2,
-    title: "Island Dreams",
-    category: "Abstract",
-    description: "Mixed media exploration of island consciousness and natural rhythms",
-    image: "https://images.unsplash.com/photo-1578321272176-d58e2d44f8a9",
-  },
-  {
-    id: 3,
-    title: "Dune Grasses",
-    category: "Nature Study",
-    description: "Watercolor and ink capturing the delicate textures of coastal vegetation",
-    image: "https://images.unsplash.com/photo-1578821870619-69d3e631a387",
-  },
-  {
-    id: 4,
-    title: "Autumn Harbor",
-    category: "Seascape",
-    description: "Acrylic painting of fishing boats at golden hour reflection",
-    image: "https://images.unsplash.com/photo-1579783902614-e3fb5141b0cb",
-  },
-  {
-    id: 5,
-    title: "Northern Lights",
-    category: "Celestial",
-    description: "Ethereal representation of dancing aurora over pristine waters",
-    image: "https://images.unsplash.com/photo-1549887534-7eefe4e3d8ba",
-  },
-  {
-    id: 6,
-    title: "Sand & Stone",
-    category: "Texture",
-    description: "Sculptural approach to coastal elements and geological formations",
-    image: "https://images.unsplash.com/photo-1549887534-f81b80e8e0fb",
-  },
-]
+const query = `*[_type == "galleryItem"]{
+  id,
+  title,
+  category,
+  description,
+  slug,
+  publishedAt,
+  image{
+    asset->{
+      url
+    }
+  }
+}`
 
 /**
  * Renders a featured gallery section with a responsive grid of cards and a modal viewer.
@@ -76,7 +47,36 @@ const galleryItems: GalleryItem[] = [
 export default function Gallery() {
   const [open, setOpen] = useState(false)
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
+  const [galleryItems, setGalleryItems] = useState<GalleryItem[]>([]);
+  const [loading, setLoading] = useState(true)
 
+  useEffect(() => {
+    /**
+     * Fetches gallery items from the Sanity backend and stores them in component state.
+     *
+     * Normalizes each item's `image` field to a URL string (empty string if missing) before updating `galleryItems`; any fetch error is logged to the console.
+     */
+    async function fetchGalleryItems() {
+      try {
+        const data = await client.fetch<GalleryItem[]>(query);
+        const itemsWithUrls = data.map((item) => ({
+          ...item,
+          image: item.image?.asset?.url || '',
+        }));
+        setGalleryItems(itemsWithUrls);
+      } catch (error) {
+        console.error("Error fetching gallery items:", error);
+      }
+    }
+
+    fetchGalleryItems().then(() => setLoading(false));
+  }, [])
+
+  /**
+   * Selects the gallery item at the given index and opens the viewer modal.
+   *
+   * @param index - Zero-based index of the gallery item to activate
+   */
   function openItem(index: number) {
     setActiveIndex(index)
     setOpen(true)
@@ -111,7 +111,55 @@ export default function Gallery() {
 
         {/* Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {galleryItems.map((item, index) => (
+          {loading ? (
+            <>
+              <Card
+                role="button"
+                tabIndex={0}
+                className="overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer group hover:cursor-pointer"
+              >
+                <div className="relative overflow-hidden h-64">
+                  <div className="w-[500px] h-[500px] bg-gray-300 animate-pulse" />
+                </div>
+
+                <CardHeader>
+                  <div className="w-full h-4 bg-gray-300 animate-pulse mb-2" />
+                  <div className="w-full h-4 bg-gray-300 animate-pulse mb-2" />
+                  <div className="w-full h-4 bg-gray-300 animate-pulse" />
+                </CardHeader>
+              </Card>
+              <Card
+                role="button"
+                tabIndex={0}
+                className="overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer group hover:cursor-pointer"
+              >
+                <div className="relative overflow-hidden h-64">
+                  <div className="w-[500px] h-[500px] bg-gray-300 animate-pulse" />
+                </div>
+
+                <CardHeader>
+                  <div className="w-full h-4 bg-gray-300 animate-pulse mb-2" />
+                  <div className="w-full h-4 bg-gray-300 animate-pulse mb-2" />
+                  <div className="w-full h-4 bg-gray-300 animate-pulse" />
+                </CardHeader>
+              </Card>
+              <Card
+                role="button"
+                tabIndex={0}
+                className="overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer group hover:cursor-pointer"
+              >
+                <div className="relative overflow-hidden h-64">
+                  <div className="w-[500px] h-[500px] bg-gray-300 animate-pulse" />
+                </div>
+
+                <CardHeader>
+                  <div className="w-full h-4 bg-gray-300 animate-pulse mb-2" />
+                  <div className="w-full h-4 bg-gray-300 animate-pulse mb-2" />
+                  <div className="w-full h-4 bg-gray-300 animate-pulse" />
+                </CardHeader>
+              </Card>
+            </>
+          ) : galleryItems.map((item, index) => (
             <Card
               key={item.id}
               role="button"
@@ -127,7 +175,7 @@ export default function Gallery() {
             >
               <div className="relative overflow-hidden h-64">
                 <Image
-                  src={item.image}
+                  src={item.image as string}
                   alt={item.title}
                   className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                   width={500}
@@ -161,7 +209,7 @@ export default function Gallery() {
 
               <div className="relative h-96 w-full overflow-hidden rounded-xl">
                 <Image
-                  src={activeItem.image}
+                  src={activeItem.image as string}
                   alt={activeItem.title}
                   fill
                   className="object-cover"
