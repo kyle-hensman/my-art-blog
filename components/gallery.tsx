@@ -51,6 +51,11 @@ export default function Gallery() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    /**
+     * Fetches gallery items from the Sanity backend and stores them in component state.
+     *
+     * Normalizes each item's `image` field to a URL string (empty string if missing) before updating `galleryItems`; any fetch error is logged to the console.
+     */
     async function fetchGalleryItems() {
       try {
         const data = await client.fetch<GalleryItem[]>(query);
@@ -67,6 +72,11 @@ export default function Gallery() {
     fetchGalleryItems().then(() => setLoading(false));
   }, [])
 
+  /**
+   * Selects the gallery item at the given index and opens the viewer modal.
+   *
+   * @param index - Zero-based index of the gallery item to activate
+   */
   function openItem(index: number) {
     setActiveIndex(index)
     setOpen(true)

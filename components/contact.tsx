@@ -11,10 +11,9 @@ import { socials } from '@/config/socials'
 import { contacts } from '@/config/contacts'
 
 /**
- * Render a contact section with contact info cards, a client-managed contact form, and social links.
+ * Renders the contact section with contact info cards, a client-managed form, and social links.
  *
- * The form manages name, email, subject, and message locally, shows a loading state while submitting,
- * displays a temporary success banner after submission, and resets the form fields.
+ * The form displays a loading state during submission and a temporary success message after completion.
  *
  * @returns The contact section as a JSX element
  */
